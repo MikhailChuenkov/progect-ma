@@ -1,0 +1,17 @@
+{
+  "goods-p": [
+    {
+      "id": 1,
+      "name": "MANGO PEOPLE T-SHIRT",
+      "price": 68
+    }
+  ],
+  "cart-p": [
+    {
+      "id": "1",
+      "price": "68",
+      "name": "MANGO PEOPLE T-SHIRT",
+      "quantity": "1"
+    }
+  ]
+}
