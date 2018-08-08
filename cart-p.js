@@ -1,5 +1,5 @@
 function renderGoodsList() {
-  //$("#products").empty();
+  $("#products").empty();
   $.get("http://localhost:3000/goods-p/", {}, function (goods) {
     let $div = $("<div />").addClass("card-product-box");
     goods.forEach(function (item) {
@@ -56,7 +56,7 @@ function renderGoodsList() {
 }
 
 function renderCart() {
-  //$("#cart").empty();
+  $("#cart").empty();
   $.get("http://localhost:3000/cart-p/", {}, function (goods) {
     let $ul = $("<ul />");
     let total = 0;
@@ -78,7 +78,7 @@ function renderCart() {
       total += +item.quantity * +item.price;
     });
     $("#cart").append($ul);
-    $("#cart").append($("<div />", {text: "Total" + total + "rub."}))
+    $("#cart").append($("<div />", {text: "Total " + total + "rub."}))
   }, "json");
 }
 
@@ -103,8 +103,8 @@ function renderCart() {
         name: $(this).attr("data-name"),
         quantity: 1
       };
-      if ($('#cart .add-to-cart-cont[data-id="' + good.id + '"]').length) {
-        var $good = $("#cart .add-to-cart-cont[data-id=" + good.id + "]");
+      if ($('#cart [data-id="' + good.id + '"]').length) {
+        var $good = $("#cart [data-id=" + good.id + "]");
         console.log($good);
         $.ajax({
           type: "PATCH",
