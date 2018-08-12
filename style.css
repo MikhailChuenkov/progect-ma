@@ -168,7 +168,7 @@ body {
   padding-top: 15px;
 }
 .goods__cart-img{
-  width: 100px;
+  height: 107px;
 }
 .goods-box-param__cart-img {
   margin-top: 7px;
@@ -1500,7 +1500,7 @@ details[open] > summary::after {
   top: -6px;
   left: 49px;
 }
-.table-cart {
+#table-cart {
   margin-top: 90px;
   border-collapse: collapse;
 }
@@ -1614,7 +1614,7 @@ details[open] > summary::after {
   font-size: 13px;
   font-weight: 300;
   line-height: 20px;
-  width: 310px;
+  width: 330px;
 }
 .cart-menu {
   padding-top: 40px;
