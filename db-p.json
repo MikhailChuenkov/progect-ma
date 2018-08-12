@@ -51,18 +51,11 @@
   ],
   "cart-p": [
     {
-      "id": "1",
-      "price": "68",
-      "name": "MANGO PEOPLE T-SHIRT",
-      "img": "img/Layer 2.png",
-      "quantity": "1"
-    },
-    {
       "id": "2",
       "price": "33",
       "name": "BANANA PEOPLE ",
       "img": "img/Layer 3.png",
-      "quantity": "1"
+      "quantity": "2"
     }
   ]
 }

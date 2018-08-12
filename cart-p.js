@@ -147,7 +147,7 @@ function renderCart() {
                 .append(
                   $("<span />", {
                     class: "goods-price goods-price__cart-img",
-                    text: item.quantity + ' x $' + +item.quantity * +item.price,
+                    text: item.quantity + ' x $' + +item.price,
                   })
                 )
             )
