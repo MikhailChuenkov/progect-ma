@@ -1,84 +1,169 @@
 function renderGoodsList() {
   $("#products").empty();
   $.get("http://localhost:3000/goods-p/", {}, function (goods) {
-    let $div = $("<div />").addClass("card-product-box");
+    let $products = $('#products');
     goods.forEach(function (item) {
-      $div.append(
-        $("<a />", {
-          href: "single page.html",
-        })
-          .append(
-            $("<img />", {
-              src: "img/Layer 2.png",
-              class: "card-product-img"
-            })
-          ).append(
-          $("<h2 />", {
-            //text:item.name + " " + item.price + "rub.",
-          }).text('MANGO PEOPLE T-SHIRT')
-        ).append(
-          $("<h4 />", {
-            text: "$" + item.price,
-          })
-        )
-      ).append(
+      $products.append(
         $("<div />", {
-          class: "add-flex",
+          class: "card-product-box",
         })
           .append(
-            $("<span />", {
-              href: "",
-              class: "add-to-cart",
+            $("<a />", {
+              href: "single page.html",
             })
               .append(
-                $("<div />", {
-                  class: "add-to-cart-cont",
-                  "data-id": item.id,
-                  "data-price": item.price,
-                  "data-name": item.name
+                $("<img />", {
+                  src: item.img,
+                  class: "card-product-img"
                 })
-                  .append(
-                    $("<img />", {
-                      src: "img/Forma 1 copy1.png"
-                    })
-                  )//.text('Add to Cart')
-                  .append(
-                    $("<span />", {
-                      text: 'Add to Cart'
-                    })
-                  )
-              )
-          )
-      )
+              ).append(
+              $("<h2 />", {
+                text: item.name,
+              })
+            ).append(
+              $("<h4 />", {
+                text: "$" + item.price,
+              })
+            )
+          ).append(
+          $("<div />", {
+            class: "add-flex",
+          })
+            .append(
+              $("<span />", {
+                href: "",
+                class: "add-to-cart",
+              })
+                .append(
+                  $("<div />", {
+                    class: "add-to-cart-cont",
+                    "data-id": item.id,
+                    "data-price": item.price,
+                    "data-name": item.name,
+                    "data-img": item.img
+                  })
+                    .append(
+                      $("<img />", {
+                        src: "img/Forma 1 copy1.png"
+                      })
+                    )//.text('Add to Cart')
+                    .append(
+                      $("<span />", {
+                        text: 'Add to Cart'
+                      })
+                    )
+                )
+            )
+        )
+      );
     });
-    $("#products").append($div);
+    $("#products").append($products);
   }, "json");
 }
 
 function renderCart() {
   $("#cart").empty();
+  $("#cart-total__cart-img").empty();
   $.get("http://localhost:3000/cart-p/", {}, function (goods) {
-    let $ul = $("<ul />");
+    let $cart = $('#cart');
     let total = 0;
     goods.forEach(function (item) {
-      $ul.append(
-        $("<li />", {
-          text: item.name + "(" + item.quantity + ")",
-        })
+      $cart
           .append(
-            $("<button />", {
-              text: "Remove",
-              "data-id": item.id,
-              "data-price": item.price,
-              "data-name": item.name,
-              "data-quantity": item.quantity
+            $("<div />", {
+              class: 'goods-box'
             })
-          )
-      );
+              .append(
+                $("<a />", {
+                  href: "single%20page.html"
+                })
+                  .append(
+                    $("<img />", {
+                      src: item.img,
+                      class: 'goods__cart-img'
+                    })
+                  )
+              )
+              .append(
+                $("<div />", {
+                  class: 'goods-box-param goods-box-param__cart-img'
+                })
+                  .append(
+                    $("<a />", {
+                      href: "single%20page.html",
+                      class: "goods-title goods-title__cart-img",
+                      text: item.name,
+                    })
+                  )
+                  .append(
+                    $("<img />", {
+                      class: 'goods-stars goods-stars__cart-img',
+                      src: "img/stars.png",
+                    })
+                  )
+                  .append(
+                    $("<span />", {
+                      class: "goods-price goods-price__cart-img",
+                      text: item.quantity + ' x $' + +item.quantity * +item.price,
+                    })
+                  )
+              )
+              .append(
+                $("<div />", {
+                  class: 'table-cart-action table-cart-action__cart-img'
+                })
+                  .append(
+                    $("<a />", {
+                      href: "#",
+                      class: 'remove',
+                      "data-id": item.id,
+                      "data-price": item.price,
+                      "data-name": item.name,
+                      "data-quantity": item.quantity
+                    })
+                      .append(
+                        $("<div />", {
+                          class: 'table-cart-action-circle'
+                        })
+                          .append(
+                            $("<div />", {
+                              class: 'cross1 cross__center'
+                            })
+                          )
+                          .append(
+                            $("<div />", {
+                              class: 'cross2 cross__center'
+                            })
+                          )
+                      )
+                  )
+              )
+          );
+
       total += +item.quantity * +item.price;
     });
-    $("#cart").append($ul);
-    $("#cart").append($("<div />", {text: "Total " + total + "rub."}))
+    // $cartMega.append(
+    //   $("<div />", {
+    //     class: 'table-cart-action-circle'
+    //   })
+    // );
+    $("#cart").append($cart);
+    $('#cart-total__cart-img').append(
+      $("<div />", {
+        class: 'cart-total-text',
+        text: 'TOTAL'
+      })
+    )
+      .append(
+        $("<div />", {
+          class: 'cart-total-price',
+          text: '$' + total
+        })
+      );
+
+    //$("#mega__cart-img").append($cart);
+    //$("#cart").append($cart);
+    //$("#cart").append($("<div />", {text: "Total $" + total}))
   }, "json");
 }
 
@@ -86,7 +171,10 @@ function renderCart() {
   $(document).ready(function () {
     renderGoodsList();
     renderCart();
-    $("#cart").on("click", ".add-to-cart-cont", function (event) {
+    /**
+     * Удаляем товар из корзины
+     */
+    $("#cart").on("click", ".remove", function (event) {
       $.ajax({
         type: "DELETE",
         url: "http://localhost:3000/cart-p/" + $(this).attr("data-id"),
@@ -95,12 +183,15 @@ function renderCart() {
         }
       })
     });
-
+    /**
+     *Добавляем товар в корзину
+     */
     $("#products").on("click", ".add-to-cart-cont", function (event) {
       let good = {
         id: $(this).attr("data-id"),
         price: $(this).attr("data-price"),
         name: $(this).attr("data-name"),
+        img: $(this).attr("data-img"),
         quantity: 1
       };
       if ($('#cart [data-id="' + good.id + '"]').length) {

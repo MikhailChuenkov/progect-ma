@@ -154,7 +154,7 @@ body {
   top: -6px;
   left: 12px;
 }
-.mega__cart-img {
+#mega__cart-img {
   top: 60px;
   padding-left: 15px;
   padding-right: 15px;
@@ -166,6 +166,9 @@ body {
   border-bottom: 2px solid #e6e6e6;
   padding-bottom: 15px;
   padding-top: 15px;
+}
+.goods__cart-img{
+  width: 100px;
 }
 .goods-box-param__cart-img {
   margin-top: 7px;
@@ -195,7 +198,7 @@ body {
   color: #222222;
   font-weight: bold;
 }
-.cart-total__cart-img {
+#cart-total__cart-img {
   padding-top: 15px;
   padding-bottom: 15px;
 }
