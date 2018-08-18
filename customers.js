@@ -3,51 +3,71 @@
  */
 function renderMyAccount() {
   $.get("http://localhost:3000/customer-online-p/", {}, function (customer) {
-    customer.forEach(function (item) {
-      if (item.name !== "") {
+      if (customer[0]) {
         $('#registrationMassageBox').css('display', 'block');
         $('#registrationMassageDefault').css('display', 'none');
         $("#registrationMassageCustomer").empty();
         $('#registrationMassageCustomer').append(
-          $('<span>', {
-            text: 'Hi, ' + item.name,
+          $('<div />', {
+            text: 'Hi, ' + customer[0].name,
           })
+        ).append(
+          $('<a />', {
+            text: 'My office',
+            href: 'myOffice.html',
+          })
+        );
+        $('.myAccountHeader a').attr(
+          'href', 'myOffice.html'
         );
       } else {
         $('#registrationMassageBox').css('display', 'none');
         $('#registrationMassageDefault').css('display', 'block');
+        $('.myAccountHeader a').attr(
+          'href', 'myAccount.html'
+        );
       }
-    });
   }, "json");
-  $('#registration')[0].reset();
-  $('#login')[0].reset();
+  $('#failureMassageSuccess').empty();
+  $('#loginMassageSuccess').empty();
 }
 
 /**
  * Показываем сообщение об успешной регистрации
  */
 function registrationMassageSuccess() {
-  $('#registrationMassageSuccess').css('display', 'block');
+  $('#registrationMassageSuccess').append(
+    $('<span>', {
+      text: 'You have successfully registered',
+    })
+  );
 }
 
 /**
  * Показываем сообщение об успешном входе в личный кабинет
  */
 function loginMassageSuccess() {
-  $('#loginMassageSuccess').css('display', 'block');
+  $('#loginMassageSuccess').append(
+    $('<span>', {
+      text: 'You have successfully signed in to your account',
+    })
+  );
 }
 
 /**
  * Показываем сообщение об ошибке при входе в личный кабинет
  */
 function failureMassageSuccess() {
-  $('#failureMassageSuccess').css('display', 'block');
+  $('#failureMassageSuccess').append(
+    $('<span>', {
+      text: 'You entered a username or password incorrectly',
+    })
+  );
 }
 
 (function ($) {
   $(document).ready(function () {
     renderMyAccount();
-
     /**
      * Нажатие на кнопку регистрации
      */
@@ -57,7 +77,6 @@ function failureMassageSuccess() {
         email: $('#registrationEmail').val(),
         password: $('#registrationPassword').val(),
       };
-      console.log(customer);
       /**
        * Отправляем на сервер данные регистрации
        */
@@ -76,6 +95,7 @@ function failureMassageSuccess() {
         data: customer,
       });
       event.preventDefault();
+      $('#registration')[0].reset();
     });
     /**
      * Нажатие на кнопку Login
@@ -94,7 +114,7 @@ function failureMassageSuccess() {
         data: customerLogin,
         success: function () {
           $.get("http://localhost:3000/customers-p/", {}, function (customer) {
-            customer.forEach(function (item) {
+            if (customer.some(function (item) {
               if (item.email === customerLogin.email && item.password === customerLogin.password) {
                 $.ajax({
                   type: "POST",
@@ -105,13 +125,18 @@ function failureMassageSuccess() {
                     password: item.password,
                   },
                 });
-                renderMyAccount();
-                loginMassageSuccess();
+                return true;
               } else {
-                renderMyAccount();
-                failureMassageSuccess();
+                return false;
               }
-            });
+            })) {
+              renderMyAccount();
+              loginMassageSuccess();
+            } else {
+              renderMyAccount();
+              failureMassageSuccess();
+            }
+
           }, "json");
         }
       });
@@ -123,6 +148,7 @@ function failureMassageSuccess() {
         url: "http://localhost:3000/customer-login-p/1",
       });
       event.preventDefault();
+      $('#login')[0].reset();
     });
     /**
      * Выход из личного кабинета
@@ -140,7 +166,7 @@ function failureMassageSuccess() {
     });
 
     /**
-     * Удаляем конкретного покупателей из общего списка
+     * Удаляем конкретного покупателя из общего списка
      */
     $("#registration").on("click", "#registrationDel", function (event) {
 
