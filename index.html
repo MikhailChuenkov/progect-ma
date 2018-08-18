@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="cart-p.js"></script>
+  <script src="customers.js"></script>
 </head>
 <body>
 <header class="container0 header">
@@ -71,9 +72,23 @@
         </div>
       </div>
       </div>
-      <a href="#" class="my-account">My Account
-        <div class="triangle-white"></div>
-      </a>
+      <div class="myAccountHeader">
+        <a href="myAccount.html" class="my-account">My Account
+          <div class="triangle-white"></div>
+        </a>
+        <div class="mega" style="width: 130px">
+          <div class="mega-list">
+            <a id="registrationMassageDefault" href="myAccount.html">Registration or Login</a>
+            <form id="registrationMassageBox" action="#" style="display: none">
+              <span id="registrationMassageCustomer"></span>
+              <button id="logout-btn"
+                      class="specification-choose-buttom-grey specification-choose-buttom-grey__cart-img">
+                Logout
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>

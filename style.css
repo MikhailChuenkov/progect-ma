@@ -135,6 +135,10 @@ body {
   color: #ffffff;
   justify-content: space-around;
 }
+
+.myAccountHeader:hover .mega {
+  display:block;
+}
 .triangle-white {
   display: flex;
   width: 0;
@@ -1625,15 +1629,15 @@ details[open] > summary::after {
 .specification-choose-buttom-grey__cart-menu {
   width: 225px;
 }
-.shopping-options {
+.shopping-options, .myAccount{
   display: flex;
   justify-content: space-between;
 }
-.shopping-options .box {
+.shopping-options .box, .myAccount .box {
   width: 360px;
   margin-bottom: 80px;
 }
-.shopping-options .box h2 {
+.shopping-options .box h2, .myAccount .box h2 {
   font-size: 16px;
   color: #222222;
   font-weight: bold;
@@ -1663,7 +1667,7 @@ details[open] > summary::after {
   padding: 10px;
   margin-bottom: 20px;
 }
-.shopping-options .box input {
+.shopping-options .box input, .myAccount .box input {
   width: 333px;
   height: 45px;
   background-color: #ffffff;
@@ -1676,7 +1680,7 @@ details[open] > summary::after {
   padding-right: 10px;
   margin-bottom: 20px;
 }
-.shopping-options .box button {
+.shopping-options .box button, .myAccount .box button {
   font-size: 11px;
   color: #4a4a4a;
   font-weight: bold;

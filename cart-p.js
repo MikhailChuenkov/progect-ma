@@ -331,8 +331,10 @@ function renderCart() {
         url: "http://localhost:3000/cart-p/" + $(this).attr("data-id"),
         success: function () {
           renderCart();
+
         }
-      })
+      });
+      console.log($(this).attr("data-id"));
     });
     /**
      *Добавляем товар в корзину
